@@ -1,16 +1,13 @@
-package dev.pinhorenan.engine;
+package engine;
 
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
-import org.lwjgl.system.*;
-
-import java.nio.*;
+import util.Time;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class Window {
@@ -18,9 +15,13 @@ public class Window {
     private String title;
     private long glfwWindow;
 
-    private float r, g, b, a;
+    public float r, g, b, a;
 
     private static Window window = null;
+
+    private static Scene currentScene;
+
+    // Constructor
 
     private Window() {
         width = 1920;
@@ -31,6 +32,24 @@ public class Window {
         b = 1.0f;
         a = 1.0f;
     }
+
+
+    //  Methods
+
+    public static void changeScene(int newScene) {
+        switch (newScene) {
+            case 0:
+                currentScene = new LevelEditorScene();
+                //currentScene.init()
+                break;
+            case 1:
+                currentScene = new LevelScene();
+                break;
+            default:
+                assert false : "Unknown scene '" + newScene + "'";
+                break;
+        }
+    };
 
     public static Window get() {
         if (Window.window == null) {
@@ -96,9 +115,15 @@ public class Window {
         // creates the GLCapabilities instance and makes the OpenGL
         // bindings available for use.
         GL.createCapabilities();
+
+        Window.changeScene(0);
     }
 
     public void loop() {
+        float beginTime = Time.getTime();
+        float endTime = Time.getTime();
+        float dt = -1.0f;
+
         while (!glfwWindowShouldClose(glfwWindow)) {
             // Poll events
             glfwPollEvents();
@@ -107,7 +132,15 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
+            if (dt >= 0) {
+                currentScene.update(dt);
+            }
+
             glfwSwapBuffers(glfwWindow);
+
+            endTime =  Time.getTime();
+            dt = endTime - beginTime;
+            beginTime = endTime;
         }
     }
 }

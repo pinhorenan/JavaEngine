@@ -1,6 +1,4 @@
-package dev.pinhorenan;
-
-import dev.pinhorenan.engine.Window;
+import engine.Window;
 
 public class Main {
     public static void main(String[] args) {
