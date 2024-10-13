@@ -18,12 +18,18 @@ public class Window {
     private String title;
     private long glfwWindow;
 
+    private float r, g, b, a;
+
     private static Window window = null;
 
     private Window() {
-        this.width = 1920;
-        this.height = 1080;
-        this.title = "Game";
+        width = 1920;
+        height = 1080;
+        title = "Game";
+        r = 1.0f;
+        g = 1.0f;
+        b = 1.0f;
+        a = 1.0f;
     }
 
     public static Window get() {
@@ -69,6 +75,12 @@ public class Window {
             throw new IllegalStateException("Failed to create the GLFW window");
         }
 
+        // Setup of input callbacks
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);;
+        glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
+        glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
+        glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+
         // Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
 
@@ -92,7 +104,7 @@ public class Window {
             glfwPollEvents();
 
             // Makes the window red
-            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+            glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
             glfwSwapBuffers(glfwWindow);
