@@ -26,13 +26,12 @@ public class Window {
     private Window() {
         width = 1920;
         height = 1080;
-        title = "Game";
+        title = "naner no openGL";
         r = 1.0f;
         g = 1.0f;
         b = 1.0f;
         a = 1.0f;
     }
-
 
     //  Methods
 
@@ -40,10 +39,11 @@ public class Window {
         switch (newScene) {
             case 0:
                 currentScene = new LevelEditorScene();
-                //currentScene.init()
+                currentScene.init();
                 break;
             case 1:
                 currentScene = new LevelScene();
+                currentScene.init();
                 break;
             default:
                 assert false : "Unknown scene '" + newScene + "'";
