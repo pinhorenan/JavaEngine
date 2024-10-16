@@ -10,7 +10,7 @@ public class MouseListener {
     private boolean[] mouseButtonPressed = new boolean[3];
     private boolean isDragging;
 
-
+    // Constructor
     private MouseListener() {
         scrollX = 0.0;
         scrollY = 0.0;
@@ -20,6 +20,7 @@ public class MouseListener {
         lastY = 0.0;
     }
 
+    // Singleton pattern
     public static MouseListener get() {
         if (MouseListener.instance == null) {
             MouseListener.instance = new MouseListener();
@@ -27,6 +28,7 @@ public class MouseListener {
         return MouseListener.instance;
     }
 
+    // Callbacks
     public static void mousePosCallback(long windows, double positionX, double positionY) {
        get().lastX = get().positionX;
        get().lastY = get().positionY;
@@ -51,6 +53,7 @@ public class MouseListener {
         get().scrollY = yOffset;
     }
 
+    // Methods
     public static void endFrame() {
         get().scrollX = 0;
         get().scrollY = 0;
@@ -86,7 +89,7 @@ public class MouseListener {
         return get().isDragging;
     }
 
-    public static boolean mouseButtomDown(int button) {
+    public static boolean mouseButtonDown(int button) {
         if (button < get().mouseButtonPressed.length) {
             return get().mouseButtonPressed[button];
         } else {

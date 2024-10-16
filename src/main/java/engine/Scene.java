@@ -2,12 +2,15 @@ package engine;
 
 public abstract class Scene {
 
+    // Constructor
     public Scene() {
+
     }
 
-    public void init() {
-    }
+    // Initialize the scene
+    public abstract void init();
 
+    // Update the scene
     public abstract void update(float dt);
 
 }

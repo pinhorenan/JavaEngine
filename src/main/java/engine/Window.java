@@ -14,15 +14,11 @@ public class Window {
     private int width, height;
     private String title;
     private long glfwWindow;
-
     public float r, g, b, a;
-
     private static Window window = null;
-
     private static Scene currentScene;
 
     // Constructor
-
     private Window() {
         width = 1920;
         height = 1080;
@@ -33,7 +29,7 @@ public class Window {
         a = 1.0f;
     }
 
-    //  Methods
+    // Methods
 
     public static void changeScene(int newScene) {
         switch (newScene) {
@@ -49,7 +45,7 @@ public class Window {
                 assert false : "Unknown scene '" + newScene + "'";
                 break;
         }
-    };
+    }
 
     public static Window get() {
         if (Window.window == null) {
@@ -95,7 +91,7 @@ public class Window {
         }
 
         // Setup of input callbacks
-        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);;
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);
         glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
         glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
         glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
