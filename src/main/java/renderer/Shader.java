@@ -17,7 +17,7 @@ public class Shader {
 
     private String vertexSource;
     private String fragmentSource;
-    private String filePath;
+    private final String filePath;
 
     // Constructor
     public Shader(String filePath) {
@@ -204,6 +204,4 @@ public class Shader {
         use();
         glUniform1i(varLocation, slot);
     }
-
 }
-
