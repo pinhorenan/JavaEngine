@@ -2,7 +2,7 @@ package engine;
 
 public abstract class Component {
 
-    protected GameObject gameObject = null;
+    public GameObject gameObject = null;
 
     public void start() {
 
