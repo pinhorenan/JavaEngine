@@ -1,5 +1,6 @@
 package engine;
 
+import components.Sprite;
 import components.SpriteRenderer;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -18,11 +19,11 @@ public class LevelEditorScene extends Scene {
         this.camera = new Camera(new Vector2f(-250, 0));
 
         GameObject object1 = new GameObject("Object 1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
-        object1.addComponent(new SpriteRenderer(AssetPool.getTexture("assets/textures/oncaFofa.jpg")));
+        object1.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/textures/oncaFofa.jpg"))));
         this.addGameObjectToScene(object1);
 
         GameObject object2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)));
-        object2.addComponent(new SpriteRenderer(AssetPool.getTexture("assets/textures/portalCube.jpg")));
+        object2.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/textures/portalCube.jpg"))));
         this.addGameObjectToScene(object2);
 
         loadResources();

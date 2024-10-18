@@ -1,5 +1,6 @@
 package util;
 
+import components.Spritesheet;
 import renderer.Shader;
 import renderer.Texture;
 
@@ -11,6 +12,7 @@ import java.util.Map;
 public class AssetPool {
     private static Map<String, Shader> shaders = new HashMap<>();
     private static Map<String, Texture> textures = new HashMap<>();
+    private static Map<String, Spritesheet> spritesheets = new HashMap<>();
 
 
     // Typically we would call this on our init function to load all the shaders necessary at the start (loading shaders...)
@@ -43,6 +45,27 @@ public class AssetPool {
             AssetPool.textures.put(file.getAbsolutePath(), texture);
             return texture;
         }
+    }
+
+    public static void addSpritesheet(String resourceName, Spritesheet spritesheet) {
+        File file = new File(resourceName);
+        // Check for the spritesheet on the spritesheet map
+        if (AssetPool.spritesheets.containsKey(file.getAbsolutePath())) {
+            // If found, return it's reference
+            System.out.println("Spritesheet found: " + file.getAbsolutePath()); // DEBUG
+        } else {
+            // If not found, add it to the map
+            System.out.println("Spritesheet not found: " + file.getAbsolutePath()); // DEBUG
+            AssetPool.spritesheets.put(file.getAbsolutePath(), spritesheet);
+        }
+    }
+
+    public static Spritesheet getSpritesheet(String resourceName) {
+        File file = new File(resourceName);
+        if(!AssetPool.spritesheets.containsKey(file.getAbsolutePath())) {
+            assert false : "Error: Tried to access spritesheet that was not loaded: " + file.getAbsolutePath();
+        }
+        return AssetPool.spritesheets.getOrDefault(file.getAbsolutePath(), null); // So that if the spritesheet fails to load, it doesn't crash the game (loads pink texture classic)
     }
 
 }
