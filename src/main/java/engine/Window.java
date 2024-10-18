@@ -3,19 +3,23 @@ package engine;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
-import util.Time;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+@SuppressWarnings("FieldMayBeFinal")
 public class Window {
     private int width, height;
     private String title;
     private long glfwWindow;
+
     public float r, g, b, a;
+    private boolean fateToBlack = false;
+
     private static Window window = null;
+
     private static Scene currentScene;
 
     // Constructor
@@ -23,10 +27,11 @@ public class Window {
         width = 1920;
         height = 1080;
         title = "naner no openGL";
-        r = 1.0f;
-        g = 1.0f;
-        b = 1.0f;
-        a = 1.0f;
+        // Colors are in RGBA format (currently 0,0,0,1 is black)
+        r = 0;
+        g = 0;
+        b = 0;
+        a = 1;
     }
 
     // Methods
@@ -122,8 +127,8 @@ public class Window {
     }
 
     public void loop() {
-        float beginTime = Time.getTime();
-        float endTime = Time.getTime();
+        float beginTime = (float)glfwGetTime();
+        float endTime;
         float dt = -1.0f;
 
         while (!glfwWindowShouldClose(glfwWindow)) {
@@ -135,12 +140,13 @@ public class Window {
             glClear(GL_COLOR_BUFFER_BIT);
 
             if (dt >= 0) {
+                System.out.println(dt);
                 currentScene.update(dt);
             }
 
             glfwSwapBuffers(glfwWindow);
 
-            endTime =  Time.getTime();
+            endTime = (float)glfwGetTime();
             dt = endTime - beginTime;
             beginTime = endTime;
         }

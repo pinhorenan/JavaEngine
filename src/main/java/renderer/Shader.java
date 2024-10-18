@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
 
+@SuppressWarnings("unused")
 public class Shader {
     private int shaderProgramID;
     private boolean beingUsed = false;
@@ -59,9 +60,6 @@ public class Shader {
             e.printStackTrace();
             assert false: "Error: Could not open file for shader: '" + filePath + "'";
         }
-
-        System.out.println(vertexSource);
-        System.out.println(fragmentSource);
 
         if (vertexSource == null) {
             System.out.println("Error: Vertex shader not successfully parsed!");
@@ -203,5 +201,11 @@ public class Shader {
         int varLocation = glGetUniformLocation(shaderProgramID, varName);
         use();
         glUniform1i(varLocation, slot);
+    }
+
+    public void uploadIntArray(String varName, int[] array) {
+        int varLocation = glGetUniformLocation(shaderProgramID, varName);
+        use();
+        glUniform1iv(varLocation, array);
     }
 }

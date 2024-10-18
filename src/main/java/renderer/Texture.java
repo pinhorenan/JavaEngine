@@ -9,9 +9,10 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBImage.stbi_image_free;
 import static org.lwjgl.stb.STBImage.stbi_load;
 
+@SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
 public class Texture {
-    private final String filePath; // File path of the texture as an attribute for DEBUG purposes.
-    private final int textureID;
+    private String filePath; // File path of the texture as an attribute for DEBUG purposes.
+    private int textureID;
 
     // Constructor
     public Texture(String filePath) {
@@ -45,7 +46,7 @@ public class Texture {
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.get(0), height.get(0),
                         0, GL_RGBA, GL_UNSIGNED_BYTE, image);
             } else {
-                assert false : "Error: (Texture) Unknown number of channesl '" + channels.get(0) + "'";
+                assert false : "Error: (Texture) Unknown number of channels '" + channels.get(0) + "'";
             }
         } else {
             assert false : "Error: (Texture) Could not load image '" + filePath + "'";
