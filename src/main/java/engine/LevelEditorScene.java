@@ -27,7 +27,7 @@ public class LevelEditorScene extends Scene {
                 float xPosition = xOffset + (x * sizeX);
                 float yPosition = yOffset + (y * sizeY);
 
-                GameObject object = new GameObject("Obj" + x + "" + y, new Transform(new Vector2f(xPosition, yPosition), new Vector2f(sizeX, sizeY)));
+                GameObject object = new GameObject("Obj" + x + ", " + y, new Transform(new Vector2f(xPosition, yPosition), new Vector2f(sizeX, sizeY)));
                 object.addComponent(new SpriteRenderer(new Vector4f(xPosition / totalWidth, yPosition / totalHeight, 1, 1)));
                 this.addGameObjectToScene(object);
             }
