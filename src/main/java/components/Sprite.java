@@ -3,6 +3,7 @@ package components;
 import org.joml.Vector2f;
 import renderer.Texture;
 
+@SuppressWarnings("FieldMayBeFinal")
 public class Sprite {
     private Texture texture;
     private Vector2f[] textureCoordinates;

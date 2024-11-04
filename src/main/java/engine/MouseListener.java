@@ -3,6 +3,7 @@ package engine;
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
+@SuppressWarnings("FieldMayBeFinal")
 public class MouseListener {
     private static MouseListener instance;
     private double scrollX, scrollY;
@@ -29,7 +30,7 @@ public class MouseListener {
     }
 
     // Callbacks
-    public static void mousePosCallback(long windows, double positionX, double positionY) {
+    public static void mousePosCallback(long window, double positionX, double positionY) {
        get().lastX = get().positionX;
        get().lastY = get().positionY;
        get().positionX = positionX;

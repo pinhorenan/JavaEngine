@@ -62,9 +62,7 @@ public class AssetPool {
 
     public static Spritesheet getSpritesheet(String resourceName) {
         File file = new File(resourceName);
-        if(!AssetPool.spritesheets.containsKey(file.getAbsolutePath())) {
-            assert false : "Error: Tried to access spritesheet that was not loaded: " + file.getAbsolutePath();
-        }
+        assert AssetPool.spritesheets.containsKey(file.getAbsolutePath()) : "Error: Tried to access spritesheet that was not loaded: " + file.getAbsolutePath();
         return AssetPool.spritesheets.getOrDefault(file.getAbsolutePath(), null); // So that if the spritesheet fails to load, it doesn't crash the game (loads pink texture classic)
     }
 
